@@ -3,7 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
 const routes = require('./routes');
-const { commonErrorHandler } = require("./helper/errorHandler");
+const { commonErrorHandler } = require('./helper/errorHandler');
 
 const app = express();
 app.use(express.json());
@@ -20,8 +20,6 @@ app.use(compression());
 // Disble x-powered-by header to hide server side technology
 app.disable('x-powered-by');
 
-
-
 app.use('/health', (_req, res) => {
   res.send({ message: 'Application runing successfully!' });
 });
@@ -31,9 +29,8 @@ routes.registerRoutes(app);
 
 // 404 Error Handling
 app.use((req, res) => {
-    const message = 'Invalid endpoint';
-    commonErrorHandler(req, res, message, 400);
-
+  const message = 'Invalid endpoint';
+  commonErrorHandler(req, res, message, 400);
 });
 
 module.exports = app;
